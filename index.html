@@ -268,10 +268,11 @@ nav {
 }
 
 .services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 2px;
   background: #E2E8F0;
+  max-width: 800px;
 }
 
 .service-card {
