@@ -607,16 +607,6 @@ footer {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
-.reveal {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.hidden {
-  opacity: 0;
-  transform: translateY(30px);
-}
 ```
 
   </style>
@@ -657,8 +647,8 @@ footer {
   <!-- SERVICES -->
 
   <section class="services" id="services">
-    <p class="section-label reveal">What we do</p>
-    <h2 class="section-title reveal">Technical solutions built around your business.</h2>
+    <p class="section-label">What we do</p>
+    <h2 class="section-title">Technical solutions built around your business.</h2>
     <div class="carousel-wrap">
       <div class="carousel-track" id="carouselTrack">
         <div class="carousel-slide">
@@ -775,10 +765,6 @@ footer {
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
 ```
-// Scroll reveal - elements visible by default
-const reveals = document.querySelectorAll('.reveal');
-reveals.forEach(el => el.classList.remove('hidden'));
-
 // Carousel
 const track = document.getElementById('carouselTrack');
 const dots = document.querySelectorAll('.carousel-dot');
