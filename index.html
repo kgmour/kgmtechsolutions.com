@@ -612,6 +612,56 @@ footer {
 ```
 
   </style>
+  <script>
+  window.addEventListener('DOMContentLoaded', function() {
+    // Email
+    var el = document.getElementById('footerEmail');
+    if (el) el.textContent = 'kevin' + '@' + 'kgmtechsolutions.com';
+
+```
+// Carousel
+var track = document.getElementById('carouselTrack');
+var dots = document.querySelectorAll('.carousel-dot');
+var current = 0;
+var total = 6;
+
+function goTo(n) {
+  current = ((n % total) + total) % total;
+  track.style.transform = 'translateX(-' + (current * 100) + '%)';
+  dots.forEach(function(dot, i) { dot.classList.toggle('active', i === current); });
+}
+
+document.getElementById('nextBtn').onclick = function() { goTo(current + 1); };
+document.getElementById('prevBtn').onclick = function() { goTo(current - 1); };
+dots.forEach(function(dot) {
+  dot.onclick = function() { goTo(parseInt(dot.dataset.index)); };
+});
+setInterval(function() { goTo(current + 1); }, 8000);
+
+// Form
+document.getElementById('contactForm').onsubmit = function(e) {
+  e.preventDefault();
+  var form = this;
+  var data = new FormData(form);
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'https://formspree.io/f/xykbjvpn');
+  xhr.setRequestHeader('Accept', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      document.getElementById('formSuccess').style.display = 'block';
+      form.reset();
+      setTimeout(function() { document.getElementById('formSuccess').style.display = 'none'; }, 6000);
+    } else {
+      alert('Something went wrong. Please email kevin@kgmtechsolutions.com directly.');
+    }
+  };
+  xhr.send(data);
+};
+```
+
+});
+</script>
+
 </head>
 <body>
 
@@ -763,8 +813,6 @@ footer {
     <div class="footer-logo">KGM</div>
     <div class="footer-copy"><span id="footerEmail"></span> &nbsp;&middot;&nbsp; &copy; 2026 KGM Technical Solutions LLC</div>
   </footer>
-
-  <script src="app.js"></script>
 
 </body>
 </html>
