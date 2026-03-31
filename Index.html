@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KGM Technical Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+```
+:root {
+  --navy: #0F172A;
+  --navy2: #1E293B;
+  --blue: #0EA5E9;
+  --blue-light: #38BDF8;
+  --slate: #475569;
+  --slate-light: #94A3B8;
+  --off-white: #F8FAFC;
+  --white: #ffffff;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--off-white);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: 72px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(14,165,233,0.1);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Inline SVG logo in nav */
+.logo-mark {
+  width: 36px;
+  height: 36px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-kgm {
+  font-family: 'Jost', sans-serif;
+  font-weight: 200;
+  font-size: 18px;
+  letter-spacing: 6px;
+  color: var(--blue);
+}
+
+.logo-sub {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--slate);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--slate);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--blue); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 5% 80px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #0c2340 100%);
+  z-index: 0;
+}
+
+/* Grid overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glowing orb */
+.hero-orb {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.15) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero-title span {
+  color: var(--blue-light);
+  font-style: italic;
+}
+
+.hero-tagline {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 200;
+  letter-spacing: 3px;
+  color: var(--slate-light);
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 36px;
+  background: transparent;
+  border: 1px solid var(--blue);
+  color: var(--blue-light);
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.hero-cta:hover {
+  background: var(--blue);
+  color: var(--white);
+  gap: 18px;
+}
+
+.hero-cta-arrow { font-size: 16px; transition: transform 0.3s; }
+.hero-cta:hover .hero-cta-arrow { transform: translateX(4px); }
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1.2s;
+}
+
+.scroll-hint span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--slate-light);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--blue-light), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* ── SERVICES ── */
+.services {
+  padding: 120px 5%;
+  background: var(--white);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  color: var(--navy);
+  margin-bottom: 64px;
+  max-width: 500px;
+  line-height: 1.15;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  background: #E2E8F0;
+}
+
+.service-card {
+  background: var(--white);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { background: #F8FAFC; }
+
+.service-number {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  color: var(--blue-light);
+  margin-bottom: 24px;
+}
+
+.service-icon {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+
+.service-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--slate);
+}
+
+/* ── CONTACT ── */
+.contact {
+  padding: 120px 5%;
+  background: var(--off-white);
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .contact { gap: 48px; }
+  .nav-links { display: none; }
+}
+
+.contact-left { position: relative; top: auto; }
+
+.contact-intro {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--slate);
+  margin-bottom: 40px;
+  max-width: 380px;
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--slate);
+  letter-spacing: 0.5px;
+}
+
+.contact-item-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(14,165,233,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.field input,
+.field textarea,
+.field select {
+  background: var(--white);
+  border: 1px solid #E2E8F0;
+  padding: 14px 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--navy);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  appearance: none;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--blue);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 40px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.submit-btn:hover {
+  background: var(--blue);
+  gap: 18px;
+}
+
+.submit-btn-arrow { transition: transform 0.3s; }
+.submit-btn:hover .submit-btn-arrow { transform: translateX(4px); }
+
+.form-success {
+  display: none;
+  padding: 20px;
+  background: rgba(14,165,233,0.08);
+  border-left: 2px solid var(--blue);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--slate);
+  letter-spacing: 0.5px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  padding: 40px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-family: 'Jost', sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  letter-spacing: 5px;
+  color: var(--blue-light);
+}
+
+.footer-copy {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: var(--slate-light);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+```
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+
+  <nav>
+    <div class="nav-logo">
+      <div style="width:3px; height:36px; background:linear-gradient(to bottom, #38BDF8, #0EA5E9); border-radius:2px;"></div>
+      <div class="logo-text">
+        <span class="logo-kgm">KGM</span>
+        <span class="logo-sub">Technical Solutions</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Technology Consulting &amp; Automation</p>
+      <h1 class="hero-title">Your business<br><span>smarter.</span></h1>
+      <p class="hero-tagline">Systems Integration &middot; Automation &middot; Cloud Solutions</p>
+      <a href="#contact" class="hero-cta">Get in touch <span class="hero-cta-arrow">→</span></a>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+
+  <section class="services" id="services">
+    <p class="section-label reveal">What we do</p>
+    <h2 class="section-title reveal">Technical solutions built around your business.</h2>
+    <div class="services-grid">
+
+```
+  <div class="service-card reveal">
+    <div class="service-number">01</div>
+    <div class="service-icon">⚙️</div>
+    <h3 class="service-name">Systems Integration</h3>
+    <p class="service-desc">Connecting your existing platforms and tools so they work together seamlessly — eliminating silos and manual data transfers.</p>
+  </div>
+
+  <div class="service-card reveal">
+    <div class="service-number">02</div>
+    <div class="service-icon">🔄</div>
+    <h3 class="service-name">Business Process Automation</h3>
+    <p class="service-desc">Identifying repetitive workflows and automating them — freeing your team to focus on work that actually moves the needle.</p>
+  </div>
+
+  <div class="service-card reveal">
+    <div class="service-number">03</div>
+    <div class="service-icon">☁️</div>
+    <h3 class="service-name">Cloud Solutions</h3>
+    <p class="service-desc">Designing and implementing cloud-based architectures that scale with your business and keep your data accessible and secure.</p>
+  </div>
+
+  <div class="service-card reveal">
+    <div class="service-number">04</div>
+    <div class="service-icon">📊</div>
+    <h3 class="service-name">Data Workflows</h3>
+    <p class="service-desc">Building reliable pipelines that move, transform, and deliver your data where it needs to go — automatically and on schedule.</p>
+  </div>
+
+  <div class="service-card reveal">
+    <div class="service-number">05</div>
+    <div class="service-icon">🔌</div>
+    <h3 class="service-name">API &amp; Custom Integrations</h3>
+    <p class="service-desc">Custom-built integrations between any platforms your business uses — whether off-the-shelf tools or proprietary systems.</p>
+  </div>
+
+  <div class="service-card reveal">
+    <div class="service-number">06</div>
+    <div class="service-icon">🛠️</div>
+    <h3 class="service-name">Technical Consulting</h3>
+    <p class="service-desc">Not sure where to start? We'll assess your current setup and build a clear, practical roadmap to get your systems working for you.</p>
+  </div>
+
+</div>
+```
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="contact">
+    <div class="contact-left reveal">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title" style="margin-bottom: 24px;">Let's talk about your project.</h2>
+      <p class="contact-intro">Whether you have a specific problem to solve or just want to explore what's possible, reach out and we'll find a time to connect.</p>
+      <div class="contact-detail">
+        <div class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          kevin@kgmtechsolutions.com
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌐</div>
+          kgmtechsolutions.com
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          Grantsville, Utah
+        </div>
+      </div>
+    </div>
+
+```
+<div class="reveal" style="width:100%;">
+  <form class="contact-form" id="contactForm">
+    <div class="form-row">
+      <div class="field">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="fname" placeholder="Jane" required/>
+      </div>
+      <div class="field">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lname" placeholder="Smith" required/>
+      </div>
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="jane@company.com" required/>
+    </div>
+    <div class="field">
+      <label for="company">Company (optional)</label>
+      <input type="text" id="company" name="company" placeholder="Acme Inc."/>
+    </div>
+    <div class="field">
+      <label for="service">Service of Interest</label>
+      <select id="service" name="service">
+        <option value="">Select a service...</option>
+        <option>Systems Integration</option>
+        <option>Business Process Automation</option>
+        <option>Cloud Solutions</option>
+        <option>Data Workflows</option>
+        <option>API &amp; Custom Integrations</option>
+        <option>Technical Consulting</option>
+        <option>Other / Not Sure</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Tell me a bit about what you're working on..." required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Send Message <span class="submit-btn-arrow">→</span></button>
+    <div class="form-success" id="formSuccess">
+      Thanks for reaching out! I'll be in touch within one business day.
+    </div>
+  </form>
+</div>
+```
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="footer-logo">KGM</div>
+    <div class="footer-copy">&copy; 2026 KGM Technical Solutions LLC &middot; Grantsville, Utah</div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Form submit (demo)
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').style.display = 'block';
+      this.reset();
+      setTimeout(() => {
+        document.getElementById('formSuccess').style.display = 'none';
+      }, 6000);
+    });
+  </script>
+
+</body>
+</html>
