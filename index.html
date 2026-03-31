@@ -794,7 +794,7 @@ footer {
     dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
 
     // Auto-rotate every 4 seconds
-    setInterval(() => goTo(current + 1), 4000);
+    setInterval(() => goTo(current + 1), 8000);
 
     // Form submit via Formspree
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
