@@ -620,7 +620,7 @@ footer {
       <div class="contact-detail">
         <div class="contact-item">
           <div class="contact-item-icon">✉</div>
-          kevin@kgmtechsolutions.com
+          <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8b3bdaeb1b698b3bfb5acbdbbb0abb7b4adacb1b7b6abf6bbb7b5">[email&#160;protected]</a>
         </div>
         <div class="contact-item">
           <div class="contact-item-icon">🌐</div>
@@ -635,7 +635,7 @@ footer {
 
 ```
 <div class="reveal" style="width:100%;">
-  <form class="contact-form" id="contactForm">
+  <form class="contact-form" id="contactForm" action="https://formspree.io/f/xykbjvpn" method="POST">
     <div class="form-row">
       <div class="field">
         <label for="fname">First Name</label>
@@ -688,28 +688,46 @@ footer {
     <div class="footer-copy">&copy; 2026 KGM Technical Solutions LLC &middot; Grantsville, Utah</div>
   </footer>
 
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
-    // Form submit (demo)
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+```
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// Form submit via Formspree
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = this;
+  const data = new FormData(form);
+  try {
+    const response = await fetch('https://formspree.io/f/xykbjvpn', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
       document.getElementById('formSuccess').style.display = 'block';
-      this.reset();
+      form.reset();
       setTimeout(() => {
         document.getElementById('formSuccess').style.display = 'none';
       }, 6000);
-    });
-  </script>
+    } else {
+      alert('Something went wrong. Please email kevin@kgmtechsolutions.com directly.');
+    }
+  } catch (err) {
+    alert('Something went wrong. Please email kevin@kgmtechsolutions.com directly.');
+  }
+});
+```
 
+  </script>
 </body>
 </html>
