@@ -148,7 +148,7 @@ nav {
   font-weight: 300;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: var(--blue-light);
+  color: #38BDF8 !important;
   margin-bottom: 28px;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards 0.2s;
@@ -159,7 +159,7 @@ nav {
   font-size: clamp(52px, 7vw, 96px);
   font-weight: 300;
   line-height: 1.05;
-  color: var(--white);
+  color: #ffffff !important;
   margin-bottom: 16px;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards 0.4s;
@@ -174,7 +174,7 @@ nav {
   font-size: clamp(16px, 2vw, 22px);
   font-weight: 200;
   letter-spacing: 3px;
-  color: var(--slate-light);
+  color: #94A3B8 !important;
   margin-bottom: 48px;
   opacity: 0;
   animation: fadeUp 0.8s ease forwards 0.6s;
@@ -506,13 +506,13 @@ footer {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.hidden {
+  opacity: 0;
+  transform: translateY(30px);
 }
 ```
 
@@ -684,16 +684,9 @@ footer {
   </footer>
 
   <script>
-    // Scroll reveal
+    // Scroll reveal - elements visible by default
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
+    reveals.forEach(el => el.classList.remove('hidden'));
 
     // Form submit via Formspree
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
