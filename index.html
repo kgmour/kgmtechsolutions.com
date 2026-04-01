@@ -615,8 +615,6 @@ footer {
   <script>
   window.addEventListener('DOMContentLoaded', function() {
     // Email
-    var el = document.getElementById('footerEmail');
-    if (el) el.textContent = 'kevin' + '@' + 'kgmtechsolutions.com';
 
 ```
 // Carousel
@@ -652,7 +650,7 @@ document.getElementById('contactForm').onsubmit = function(e) {
       form.reset();
       setTimeout(function() { document.getElementById('formSuccess').style.display = 'none'; }, 6000);
     } else {
-      alert('Something went wrong. Please email kevin@kgmtechsolutions.com directly.');
+      alert('Something went wrong. Please try again or use the contact form.');
     }
   };
   xhr.send(data);
@@ -811,7 +809,7 @@ document.getElementById('contactForm').onsubmit = function(e) {
 
   <footer>
     <div class="footer-logo">KGM</div>
-    <div class="footer-copy"><span id="footerEmail"></span> &nbsp;&middot;&nbsp; &copy; 2026 KGM Technical Solutions LLC</div>
+    <div class="footer-copy">&copy; 2026 KGM Technical Solutions LLC</div>
   </footer>
 
 </body>
